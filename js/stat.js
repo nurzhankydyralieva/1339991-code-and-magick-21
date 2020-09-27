@@ -1,14 +1,18 @@
-var fireballSize = 22;
+var FIRE_BALL_SIZE = 22;
+var SPEED_WITH_WIND = 5;
+var SPEED_AGAINST_WIND = 2;
+
 var getFireballSpeed = function (isMovingLeft) {
-  return isMovingLeft ? 2 : 5;
+  return isMovingLeft ? SPEED_AGAINST_WIND : SPEED_WITH_WIND;
 };
-var wizardWidth = 70;
+var WIZARD_WIDTH = 70;
+var WIZARD_HEIGHT = 1.337 * WIZARD_WIDTH;
 var getWizardHeight = function () {
-  return 1.337 * wizardWidth;
+  return WIZARD_HEIGHT;
 };
-var wizardSpeed = 3;
+var WIZARD_SPEED = 3;
 var getWizardX = function (gameFieldWidth) {
-  return (gameFieldWidth - wizardWidth) / 2;
+  return (gameFieldWidth - WIZARD_WIDTH) / 2;
 };
 var getWizardY = function (gameFieldHeight) {
   return gameFieldHeight / 3;

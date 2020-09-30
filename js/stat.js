@@ -1,25 +1,4 @@
 "use strict";
-let FIRE_BALL_SIZE = 22;
-let SPEED_WITH_WIND = 5;
-let SPEED_AGAINST_WIND = 2;
-
-const getFireballSpeed = function (isMovingLeft) {
-  return isMovingLeft ? SPEED_AGAINST_WIND : SPEED_WITH_WIND;
-};
-let WIZARD_WIDTH = 70;
-let CALCULATION_FORMULA = 1.337;
-let WIZARD_HEIGHT = CALCULATION_FORMULA * WIZARD_WIDTH;
-const getWizardHeight = function () {
-  return WIZARD_HEIGHT;
-};
-let WIZARD_SPEED = 3;
-const getWizardX = function (gameFieldWidth) {
-  return (gameFieldWidth - WIZARD_WIDTH) / 2;
-};
-const getWizardY = function (gameFieldHeight) {
-  return gameFieldHeight / 3;
-};
-
 let CLOUD_WIDTH = 500;
 let CLOUD_HEIGTH = 200;
 
@@ -56,15 +35,15 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (let i = 0; i < players.length; i++) {
     ctx.fillText(
-      players[i],
-      CLOUD_X + GAP,
-      CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i
+        players[i],
+        CLOUD_X + GAP,
+        CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i
     );
     ctx.fillrect(
-      CLOUD_X + GAP + TEXT_WIDTH,
-      CLOUD_Y + GAP + (GAP + BAR_HEIGHT) * i,
-      (BAR_WIDTH * times[i]) / maxTime,
-      BAR_HEIGHT
+        CLOUD_X + GAP + TEXT_WIDTH,
+        CLOUD_Y + GAP + (GAP + BAR_HEIGHT) * i,
+        (BAR_WIDTH * times[i]) / maxTime,
+        BAR_HEIGHT
     );
   }
 };

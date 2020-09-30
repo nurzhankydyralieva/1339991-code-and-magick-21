@@ -7,10 +7,3 @@ env:
 extends:
   "htmlacademy/es5.5"
 
-"eslint.enable": true,
-
-"eslint.autoFixOnSave": true,
-
-"eslint.options":{
-  "configFile" "/Users/username/.eslintrc.json"
-}

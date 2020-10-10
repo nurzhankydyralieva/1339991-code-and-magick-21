@@ -1,14 +1,16 @@
 "use strict";
-let CLOUD_WIDTH = 500;
-let CLOUD_HEIGTH = 200;
+const CLOUD_WIDTH = 420;
+const CLOUD_HEIGTH = 270;
 
-let CLOUD_X = 100;
-let CLOUD_Y = 50;
-let GAP = 10;
-let FONT_GAP = 15;
-let TEXT_WIDTH = 50;
-let BAR_HEIGHT = 20;
-let BAR_WIDTH = CLOUD_WIDTH - GAP - TEXT_WIDTH - GAP;
+const CLOUD_X = 100;
+const CLOUD_Y = 10;
+const GAP = 10;
+
+const GAP_Y = 150;
+const FONT_GAP = 15;
+const TEXT_WIDTH = 50;
+const BAR_HEIGHT = 20;
+const BAR_WIDTH = CLOUD_WIDTH - GAP - TEXT_WIDTH - GAP;
 
 const renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -27,23 +29,33 @@ const getMaxElement = function (arr) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.3)`);
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.7)`);
   renderCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
 
   ctx.fillStyle = `#000`;
-  let maxTime = getMaxElement(times);
+
+  ctx.font = `16px PT Mono`;
+  ctx.fillText(`Ура вы победили!`, 115, 50);
+  ctx.fillText(`Список результатов:`, 115, 70);
+
+  const maxTime = getMaxElement(times);
 
   for (let i = 0; i < players.length; i++) {
     ctx.fillText(
-        players[i],
-        CLOUD_X + GAP,
-        CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i
+      times[i],
+      CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i,
+      CLOUD_X
     );
-    ctx.fillrect(
-        CLOUD_X + GAP + TEXT_WIDTH,
-        CLOUD_Y + GAP + (GAP + BAR_HEIGHT) * i,
-        (BAR_WIDTH * times[i]) / maxTime,
-        BAR_HEIGHT
+    ctx.fillText(
+      players[i],
+      CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i,
+      CLOUD_X + GAP + GAP_Y
+    );
+    ctx.fillRect(
+      CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i,
+      (BAR_HEIGHT * times[i]) / maxTime,
+      BAR_HEIGHT,
+      CLOUD_X + GAP + GAP_Y
     );
   }
 };

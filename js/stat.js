@@ -6,11 +6,12 @@ const CLOUD_X = 100;
 const CLOUD_Y = 10;
 const GAP = 10;
 const GAP_X = 90;
-const GAP_Y = 260;
+const GAP_Y = 230;
+const BAR_GAP = 20;
 const FONT_GAP = 60;
 const TEXT_WIDTH = 30;
 const BAR_WIDTH = 50;
-const BAR_HEIGTH = CLOUD_HEIGTH - GAP - GAP_X - GAP;
+const BAR_HEIGTH = -150;
 
 const renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -38,22 +39,38 @@ window.renderStatistics = function (ctx, players, times) {
   const maxTime = getMaxElement(times);
 
   for (let i = 0; i < players.length; i++) {
+    ctx.fillStyle = `#000`;
     ctx.fillText(
       players[i],
       CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
-      CLOUD_Y + GAP_Y
-    );
-    ctx.fillText(
-      times[i],
-      CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
-      CLOUD_Y + FONT_GAP
+      CLOUD_Y + GAP_Y + BAR_GAP
     );
 
+    ctx.fillStyle = `#000`;
+    ctx.fillText(
+      Math.round(times[i]),
+      CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
+      CLOUD_Y + FONT_GAP + GAP
+    );
+
+    const renderRectangle = function (ctx, x, y, width, height, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, BAR_WIDTH, barHeight);
+    };
+
+    const randomColor = Math.floor(Math.random() * 100) + 1;
+    ctx.fillStyle =
+      players[i] === `Вы`
+        ? `rgba(255, 0, 0, 1)`
+        : `hsl(240,` + randomColor + `%, 50%)`;
+
+    const barHeight = (BAR_HEIGTH * times[i]) / maxTime;
+    console.log(barHeight);
     ctx.fillRect(
       CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
-      CLOUD_Y + FONT_GAP + GAP,
+      CLOUD_Y + GAP_Y,
       BAR_WIDTH,
-      (BAR_HEIGTH * times[i]) / maxTime
+      barHeight
     );
   }
 };

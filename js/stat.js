@@ -11,7 +11,7 @@ const BAR_GAP = 20;
 const FONT_GAP = 60;
 const TEXT_WIDTH = 30;
 const BAR_WIDTH = 50;
-const BAR_HEIGTH = -150;
+const BAR_HEIGTH = CLOUD_HEIGTH - GAP - CLOUD_X - GAP;
 
 const renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -34,8 +34,8 @@ window.renderStatistics = function (ctx, players, times) {
 
   ctx.fillStyle = `#000`;
   ctx.font = `16px PT Mono`;
-  ctx.fillText(`Ура вы победили!`, 140, 30);
-  ctx.fillText(`Список результатов:`, 140, 50);
+  ctx.fillText(`Ура вы победили!`, 140, 35);
+  ctx.fillText(`Список результатов:`, 140, 55);
   const maxTime = getMaxElement(times);
 
   for (let i = 0; i < players.length; i++) {
@@ -44,13 +44,6 @@ window.renderStatistics = function (ctx, players, times) {
       players[i],
       CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
       CLOUD_Y + GAP_Y + BAR_GAP
-    );
-
-    ctx.fillStyle = `#000`;
-    ctx.fillText(
-      Math.round(times[i]),
-      CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
-      CLOUD_Y + FONT_GAP + GAP
     );
 
     const renderRectangle = function (ctx, x, y, width, height, color) {
@@ -70,7 +63,13 @@ window.renderStatistics = function (ctx, players, times) {
       CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
       CLOUD_Y + GAP_Y,
       BAR_WIDTH,
-      barHeight
+      -barHeight
+    );
+    ctx.fillStyle = `#000`;
+    ctx.fillText(
+      Math.round(times[i]),
+      CLOUD_X + GAP + TEXT_WIDTH + (GAP + GAP_X) * i,
+      GAP_Y - barHeight
     );
   }
 };

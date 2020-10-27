@@ -8,7 +8,6 @@ const GAP = 10;
 const GAP_X = 90;
 const GAP_Y = 230;
 const BAR_GAP = 20;
-const FONT_GAP = 60;
 const TEXT_WIDTH = 30;
 const BAR_WIDTH = 50;
 const BAR_HEIGTH = CLOUD_HEIGTH - GAP - CLOUD_X - GAP;
